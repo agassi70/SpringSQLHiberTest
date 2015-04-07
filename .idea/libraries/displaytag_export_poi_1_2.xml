@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="displaytag-export-poi-1.2">
+    <CLASSES>
+      <root url="jar://D:/displaytag-1.2/displaytag-export-poi-1.2.jar!/" />
+      <root url="jar://D:/displaytag-1.2/displaytag-portlet-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
