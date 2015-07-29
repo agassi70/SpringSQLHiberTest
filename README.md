@@ -1,4 +1,4 @@
 # SpringSQLHiberTest
-база в MySQL test, таблица users, 
-пользователь и пароль - root, 
-скрипт для создания users.sql
+База в MySQL test, пользователь - root, пароль - root.
+Перед запуском программы запускаем createTable.sql.
+Используем Tomcat.
