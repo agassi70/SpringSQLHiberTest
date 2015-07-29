@@ -1,22 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - test@localhost" uuid="549af9e2-8cd5-4755-85e9-de97f3b0b862">
+  <data-source name="MySQL - test@localhost" uuid="9df2c6a5-c0ca-4f14-9246-aff5155287e9">
     <database-info product="MySQL" version="5.7.6-m16-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="test"/>
+    <table name="comment" schema="" catalog="test" type="TABLE">
+      <column name="comment_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="comment_text" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="comment_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="document_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="comment_id"/>
+      <foreign-key name="comment_ibfk_1" columns="document_id" ref-table="document" ref-schema="" ref-catalog="test" ref-columns="document_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="dialogue" schema="" catalog="test" type="TABLE">
+      <column name="dialogue_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="dialogue_name" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="dialogue_id"/>
+    </table>
+    <table name="document" schema="" catalog="test" type="TABLE">
+      <column name="document_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="document_name" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="document_value" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="document_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="theme_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="document_id"/>
+      <foreign-key name="document_ibfk_1" columns="theme_id" ref-table="theme" ref-schema="" ref-catalog="test" ref-columns="theme_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="comment_ibfk_1" table="comment" schema="" catalog="test" columns="document_id"/>
+      <exported-key name="image_ibfk_1" table="image" schema="" catalog="test" columns="document_id"/>
+    </table>
+    <table name="image" schema="" catalog="test" type="TABLE">
+      <column name="image_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="image_name" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image_first_url" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="image_second_url" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image_third_url" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image_bs_code" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="document_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="image_id"/>
+      <foreign-key name="image_ibfk_1" columns="document_id" ref-table="document" ref-schema="" ref-catalog="test" ref-columns="document_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="message" schema="" catalog="test" type="TABLE">
+      <column name="message_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="message_text" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="message_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dialogue_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="message_id"/>
+      <foreign-key name="message_ibfk_1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="test" ref-columns="user_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="theme" schema="" catalog="test" type="TABLE">
+      <column name="theme_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="theme_name" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="theme_id"/>
+      <foreign-key name="theme_ibfk_1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="test" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="document_ibfk_1" table="document" schema="" catalog="test" columns="theme_id"/>
+    </table>
+    <table name="user" schema="" catalog="test" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_first_name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_last_name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <exported-key name="message_ibfk_1" table="message" schema="" catalog="test" columns="user_id"/>
+      <exported-key name="theme_ibfk_1" table="theme" schema="" catalog="test" columns="user_id"/>
+      <index name="user_login" unique="true" columns="user_login"/>
+    </table>
+    <table name="user_auth" schema="" catalog="test" type="TABLE">
+      <column name="user_login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_login"/>
+      <index name="user_login" unique="true" columns="user_login"/>
+    </table>
+    <table name="user_dialogue" schema="" catalog="test" type="TABLE">
+      <column name="user_dialogue_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dialogue_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="has_new_message" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="user_dialogue_id"/>
+    </table>
+    <table name="user_roles" schema="" catalog="test" type="TABLE">
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_role" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="role_id"/>
+    </table>
     <table name="users" schema="" catalog="test" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="age" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="createdDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="isAdmin" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
       <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="users2" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="age" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>
